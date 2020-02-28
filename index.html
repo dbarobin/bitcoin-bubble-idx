@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>比特币泡沫指数</title>
+    <meta charset="utf-8">
+    <meta name="description" content="比特币泡沫指数，来源:GitHub，指数推荐:@马超Terminal，数据更新:@区块链罗宾">
+    <meta name="keywords" content="互联网,科技,区块链,Blockchain,加密货币,Cryptocurrency,比特币,Bitcoin,以太坊,Ethereum,门罗币,Monero,区块链资产交易平台,币币交易,数字货币交易网,虚拟货币账户,比特币交易系统,以太坊行情,莱特币走势,BNB,赵长鹏,BTC价格,ETH钱包注册,LTC市价,币安,杠杆期货,Binance">
+    <link rel="shortcut icon" href="https://dbarobin.com/images/favicon.ico"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="echarts.js"></script>
+    <style type="text/css">
+        body {
+            font-size:14px;
+            letter-spacing: 0.05em;
+            margin: 0;
+            padding: 0;
+            color: #555;
+            min-width:220px;
+            PADDING-BOTTOM: 0px; LINE-HEIGHT: 20px;  PADDING-LEFT: 0px; PADDING-RIGHT: 0px; FONT-FAMILY: Microsoft YaHei, Helvetica, Tahoma;  PADDING-TOP: 0px;
+        }
+        A:visited {
+            COLOR: #78c3eb; TEXT-DECORATION: none
+        }
+        A:active {
+            COLOR: #78c3eb; TEXT-DECORATION: none
+        }
+        A:link {
+            COLOR: #78c3eb; TEXT-DECORATION: none
+        }
+        A:hover {
+            COLOR: #f9c10b; text-deroration: none;
+        position: relative; left: 1px; top: 1px; clip:rect(   )
+        }
+    </style>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-57297247-8"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-57297247-8');
+    </script>
+
+    <!-- Google AdSense -->
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({
+              google_ad_client: "ca-pub-2635246907933208",
+              enable_page_level_ads: true
+         });
+    </script>
+</head>
+<body>
+
+<center>
+    <h1>比特币泡沫指数</h1>
+    <h4>
+        <a href="https://github.com/aksnzhy/bitcoin-bubble-index" target="_blank">来源:GitHub</a> <a href="https://weibo.com/1633615122/IjEHRzxb8" target="_blank">指数推荐:@马超Terminal</a> <a href="https://weibo.com/rwio" target="_blank">数据更新:@区块链罗宾</a>
+    </h4>
+    <h5>
+        <font color="#c27bd2">目前已更新到最新数据，网页底部滑动滚动条查看。</font>
+    </h5>
+    <div id="main" style="width:96%;max-width:1200px; height:1600px"></div>
+</center>
+    <script type="text/javascript" src="data.json"></script>
+    <script type="text/javascript">
+        // Get data from json file
+    	var mydata = JSON.parse(data);
+        var timeData = mydata.date;
+        var priceData = mydata.price;
+        var growData = mydata.growth_60_day;
+        var hotData = mydata.hot;
+        var bubbleData = mydata.bubble
+        // Init echarts
+        var myChart = echarts.init(document.getElementById('main'));
+        // set option
+        var option = {
+            title: {
+                text: '',
+                x: 'center'
+            },
+            axisPointer: {
+                link: {xAxisIndex: 'all'}
+            },
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: {
+                    animation: false
+                }
+            },
+            legend: {
+                right: 100,
+                top: 30,
+                data:['linear scale','log scale'],
+            },
+            dataZoom: [{
+                show: true,
+                realtime: true,
+                start: 0,
+                end: 100,
+                xAxisIndex: [0,1,2,3]
+            }],
+            grid: [{
+                left: 100,
+                top: '6%',
+                height: '18%'
+            },{
+                left: 100,
+                top: '30%',
+                height: '18%'
+            },{
+                left: 100,
+                top: '54%',
+                height: '18%'
+            },{
+                left: 100,
+                top: '78%',
+                height: '18%'
+            }],
+            xAxis: [{
+                type : 'category',
+                boundaryGap : false,
+                axisLine: {onZero: true},
+                data: timeData
+            }, {
+                gridIndex: 1,
+                type : 'category',
+                boundaryGap : false,
+                axisLine: {onZero: true},
+                data: timeData
+            }, {
+                gridIndex: 2,
+                type : 'category',
+                boundaryGap : false,
+                axisLine: {onZero: true},
+                data: timeData
+            }, {
+                gridIndex: 3,
+                type : 'category',
+                boundaryGap : false,
+                axisLine: {onZero: true},
+                data: timeData
+            }],
+            yAxis: [
+                {
+                    name : 'BTC Price (USD)',
+                    type : 'value'
+                },
+                {
+                    type : 'log'
+                },
+                {
+                    gridIndex: 1,
+                    name : '60 days Cumulative Increase (%)',
+                    type : 'value'
+                },
+                {
+                    gridIndex: 2,
+                    name : 'Hot Keywords (Google + Twitter)',
+                    type : 'value'
+                },
+                {
+                    gridIndex: 3,
+                    name : 'Bubble Index',
+                    type : 'value'
+                }
+            ],
+            series : [
+                {
+                    yAxisIndex : 1,
+                    name : 'log scale',
+                    type : 'line',
+                    hoverAnimation : false,
+                    data : priceData,
+                    markLine: {
+                        data: [{
+                           name: 'first halfing',
+                           xAxis: '2012/11/28'
+                        }, {
+                           name: 'second halfing',
+                           xAxis: '2016/07/10'
+                        }]
+                    }
+                },
+                {
+                    name : 'linear scale',
+                    type : 'line',
+                    smooth : true,
+                    hoverAnimation : false,
+                    data : priceData
+                },
+                {
+                    xAxisIndex: 1,
+                    yAxisIndex: 2,
+                    name : '60 days CI (%)',
+                    type : 'line',
+                    smooth : true,
+                    hoverAnimation : false,
+                    data : growData
+                },
+                {
+                    xAxisIndex: 2,
+                    yAxisIndex: 3,
+                    name : 'Hot Keywords',
+                    type : 'line',
+                    smooth : true,
+                    hoverAnimation : false,
+                    data : hotData
+                },
+                {
+                    xAxisIndex: 3,
+                    yAxisIndex: 4,
+                    name : 'Bubble Index',
+                    type : 'line',
+                    smooth : true,
+                    hoverAnimation : false,
+                    data : bubbleData
+                }
+            ]
+        }
+        myChart.setOption(option);
+    </script>
+</body>
+</html>
